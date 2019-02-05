@@ -1,0 +1,122 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav" sec:authorize="isAuthenticated()">
+    <a class="navbar-brand" href="index.html">Mock HPLink</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="/dashboard">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Gateway">
+          <a class="nav-link" href="/jobs">
+            <i class="fa fa-fw fa-code"></i>
+            <span class="nav-link-text">Fiddle</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Persistece">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapsePersistence" data-parent="#persistenceAccordion">
+            <i class="fa fa-fw fa-database"></i>
+            <span class="nav-link-text">Persistence</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapsePersistence">
+            <li>
+              <a href="navbar.html">Prodcuts</a>
+            </li>
+            <li>
+              <a href="cards.html">Properties</a>
+            </li>
+            <li>
+              <a href="cards.html">Jobs</a>
+            </li>
+          </ul>
+		</li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+          <a class="nav-link" href="/admin">
+            <i class="fa fa-fw fa-wrench"></i>
+            <span class="nav-link-text">Admin</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav sidenav-toggler">
+        <li class="nav-item">
+          <a class="nav-link text-center" id="sidenavToggler">
+            <i class="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-fw fa-envelope"></i>
+            <span class="d-lg-none">Messages
+              <span class="badge badge-pill badge-primary" th:text="${newMsgCount +  ' New'}"></span>
+            </span>
+            <span class="indicator text-primary d-none d-lg-block">
+              <i class="fa fa-fw fa-circle"></i>
+            </span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="messagesDropdown">
+            <h6 class="dropdown-header">New Messages:</h6>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" th:each="msg : ${msgs}" href="/messsage?id=${msg.id}" >
+              <strong th:text="${msg.recipient.firstName} + ${msg.recipient.lastName}"></strong>
+              <span class="small float-right text-muted" th:text="msg.created"></span>
+              <div class="dropdown-message small" th:text="${msg.text}"></div>
+            </a>
+            <div class="dropdown-divider"></div>           
+            <a class="dropdown-item small" href="#">View all messages</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-fw fa-bell"></i>
+            <span class="d-lg-none">Alerts
+              <span class="badge badge-pill badge-warning" th:text="${newAlertCount + ' New'}"></span>
+            </span>
+            <span class="indicator text-warning d-none d-lg-block">
+              <i class="fa fa-fw fa-circle"></i>
+            </span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="alertsDropdown">
+            <h6 class="dropdown-header">New Alerts:</h6>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" th:each="alert : ${alerts}"  href="/alert?id=${alert.id}">
+              <span class="text-success">
+                <strong th:text="${alert.subject}">
+                  <i class="fa fa-long-arrow-up fa-fw"></i></strong>
+              </span>
+              <span class="small float-right text-muted" th:text="${alert.created}"></span>
+              <div class="dropdown-message small" th:text="${alert.text}"></div>
+            </a>
+            <div class="dropdown-divider"></div>
+          </div>
+        </li>        
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#logoutModal">
+            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModal" aria-hidden="true" th:if="${activeUser != null}">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="logoutModalLabel">Leaving so soon?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
+        </div>
+      </div>
+  </div>

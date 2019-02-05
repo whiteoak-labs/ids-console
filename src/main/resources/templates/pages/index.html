@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout"
+      th:with="title='Welcome'">
+      
+	<th:block layout:fragment="content">
+	    <div id="main" class="container">
+		    <!-- img alt="LSC Communications" class="img-responsive center-block" src="images/logo.gif" style="margin:0 auto;"-->
+		    <p class="text-center">Welcome to Mock HPLink Console.<br/><br/> Please login <a th:href="@{/account/login}">here</a>.</p>
+		</div>
+	</th:block>
+	
+</html>
